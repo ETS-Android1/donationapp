@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PayingActivity">
+
+
+    <EditText
+        android:id="@+id/edittextprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter how much u want 2 donate"
+        android:layout_margin="50dp"
+        />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:background="@drawable/googlepay_button_background"
+        android:padding="2sp"
+        android:contentDescription="@string/donate_with_googlepay_button_content_description">
+        <LinearLayout
+            android:duplicateParentState="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/googlePayButton"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:duplicateParentState="true"
+                android:src="@drawable/donate_with_googlepay_button_content"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:duplicateParentState="true"
+            android:src="@drawable/googlepay_button_overlay"/>
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>
