@@ -1,5 +1,7 @@
 package com.example.finalproject;
 
+import android.util.Log;
+
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -12,29 +14,61 @@ public class PasswordHasher {
 
     /*
     */
-    private static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException
+    public static String generateStrongPasswordHash(String password)
     {
         //how many times we run the algorithm on itself
         int iterations = 1000;
         char[] chars = password.toCharArray();
         byte[] salt = getSalt();
         PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
-        byte[] hash = skf.generateSecret(spec).getEncoded();
+
+        SecretKeyFactory skf = null;
+        try {
+            skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        if(skf==null)
+        {
+            Log.e("generateStrongPasswordHash","could not get instance of secretkeyfactory");
+            return null;
+        }
+
+        byte[] hash = new byte[0];
+        try {
+            hash = skf.generateSecret(spec).getEncoded();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        if(hash.length==0)
+        {
+            Log.e("generateStrongPasswordHash","could not generateSecret");
+            return null;
+        }
+
         return iterations + ":" + toHex(salt) + ":" + toHex(hash);
     }
 
-    private static byte[] getSalt() throws NoSuchAlgorithmException
+    private static byte[] getSalt()
     {
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        SecureRandom sr = null;
+        try {
+            sr = SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        if(sr==null)
+        {
+            return null;
+        }
         //a salt is of 16 bytes, so we make one and store all the bytes generated in it.
         byte[] salt = new byte[16];
         sr.nextBytes(salt);
         return salt;
     }
 
-    private static String toHex(byte[] array) throws NoSuchAlgorithmException
+    private static String toHex(byte[] array)
     {
         //an algorithm to convert decimal to hex
 
@@ -50,8 +84,8 @@ public class PasswordHasher {
         }
     }
 
-    private static boolean validatePassword(String originalPassword, String storedPassword)
-            throws NoSuchAlgorithmException, InvalidKeySpecException
+    public static boolean validatePassword(String originalPassword, String storedPassword)
+
     {
         String[] parts = storedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
@@ -61,8 +95,27 @@ public class PasswordHasher {
 
         PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(),
                 salt, iterations, hash.length * 8);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        byte[] testHash = skf.generateSecret(spec).getEncoded();
+
+        //here, secretkeyfactory.getInstance might throw an exception
+        SecretKeyFactory skf = null;
+        try {
+            skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        if(skf==null)
+        {
+            Log.e("validatePassword","could not get instance of secretkeyfactory");
+            return false;
+        }
+
+        //here, secretkeyfactory.generateSecret might throw an exception
+        byte[] testHash = new byte[0];
+        try {
+            testHash = skf.generateSecret(spec).getEncoded();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
 
         int diff = hash.length ^ testHash.length;
         for(int i = 0; i < hash.length && i < testHash.length; i++)
@@ -71,7 +124,9 @@ public class PasswordHasher {
         }
         return diff == 0;
     }
-    private static byte[] fromHex(String hex) throws NoSuchAlgorithmException
+
+
+    private static byte[] fromHex(String hex)
     {
         byte[] bytes = new byte[hex.length() / 2];
         for(int i = 0; i < bytes.length ;i++)

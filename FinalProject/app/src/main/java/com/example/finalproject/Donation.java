@@ -31,33 +31,4 @@ public class Donation {
         this.date=date;
         this.user_id = user_id;
     }
-
-    @Override
-    public String toString() {
-        return "Donation{" +
-                "donation_id='" + donation_id + '\'' +
-                ", amount=" + amount +
-                ", date='" + date + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-    public static boolean insertData (SQLiteDatabase db, String user_id, String username, String password_hash) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1, user_id);
-        contentValues.put(COL_2, username);
-        contentValues.put(COL_3, password_hash);
-
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        if ( result == -1)
-            return  false;
-        else
-            return  true;
-    }
-    public Cursor getAllData(SQLiteDatabase db) {
-        Cursor res = db.rawQuery("Select * from " + TABLE_NAME, null);
-        return res;
-    }
 }

@@ -4,23 +4,23 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+import androidx.room.*;
+
+@Entity
 public class User {
 
-    private String user_id;
+    @PrimaryKey(autoGenerate = true) @NonNull
+    private int user_id;
+    @ColumnInfo(name = "username")
     private String username;
+    @ColumnInfo(name = "password_hash")
     private String password_hash;
 
+    @Ignore
     private String password;
 
-    public final static String TABLE_NAME="user";
-    private final static String COL_1="user_id";
-    private final static String COL_2="username";
-    private final static String COL_3="password_hash";
-
-
-    public User(String user_id, String username, String password_hash) {
-
-        this.user_id = user_id;
+    public User(String username, String password_hash) {
         this.username = username;
         this.password_hash = password_hash;
     }
@@ -30,33 +30,32 @@ public class User {
         return "User{" +
                 "user_id='" + user_id + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", password_hash='" + password_hash + '\'' +
                 '}';
     }
 
-
-    public static User getUser(SQLiteDatabase db, String user_id)
-    {
-        Cursor res = db.rawQuery("Select * from "+ TABLE_NAME + " WHERE "+COL_1+"= ?",new String[] {user_id});
-        return new User(res.getString(0), res.getString(1),res.getString(2) );
+    public int getUser_id() {
+        return user_id;
     }
 
-    public static boolean insertData (SQLiteDatabase db, String user_id, String username, String password_hash) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1, user_id);
-        contentValues.put(COL_2, username);
-        contentValues.put(COL_3, password_hash);
-
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        if ( result == -1)
-            return  false;
-        else
-            return  true;
+    public String getUsername() {
+        return username;
     }
-    public Cursor getAllData(SQLiteDatabase db) {
-        Cursor res = db.rawQuery("Select * from " + TABLE_NAME, null);
-        return res;
+
+    public String getPassword_hash() {
+        return password_hash;
     }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword_hash(String password_hash) {
+        this.password_hash = password_hash;
+    }
+
 }

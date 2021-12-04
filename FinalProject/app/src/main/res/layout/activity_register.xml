@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/profilePicture2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="200dp"
+        android:minHeight="200dp"
+        android:layout_centerHorizontal="true"
+
+        android:src="@drawable/ic_baseline_account_circle_24" />
+
+    <EditText
+        android:id="@+id/usernameErrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profilePicture2"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:enabled="false"
+        android:background="@null"
+        android:text="This username is already taken."
+        android:textColor="@color/red"/>
+
+    <EditText
+        android:id="@+id/usernameText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter a new username"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_below="@+id/usernameErrorText"
+        />
+    <EditText
+        android:id="@+id/passwordText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter a new password"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_below="@+id/usernameText2"
+        android:inputType="textPassword"
+        />
+    <EditText
+        android:id="@+id/confirmPasswordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="confirm new password"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_below="@+id/passwordText2"
+        android:inputType="textPassword"
+        />
+    <EditText
+        android:id="@+id/passwordErrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/confirmPasswordText"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:enabled="false"
+        android:background="@null"
+        android:text="Make sure both passwords match."
+        android:textColor="@color/red"/>
+    <Button
+        android:id="@+id/registerButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/passwordText2"
+        android:layout_below="@+id/passwordErrorText"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
