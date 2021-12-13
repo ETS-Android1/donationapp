@@ -23,4 +23,8 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    @Update
+    public void updateUsers(User... users);
+
 }

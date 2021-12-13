@@ -38,14 +38,26 @@
         android:layout_below="@+id/usernameText"
         android:inputType="textPassword"
         />
+    <EditText
+        android:id="@+id/errorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordText"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:enabled="false"
+        android:background="@null"
+        android:text="Make sure information is correct."
+        android:textColor="@color/red"/>
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@+id/passwordText"
-        android:layout_below="@+id/passwordText"
+        android:layout_below="@+id/errorText"
         android:layout_centerHorizontal="true"
         />
 

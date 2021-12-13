@@ -10,10 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".DonateActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CharityAddActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CharityEditActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />

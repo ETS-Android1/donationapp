@@ -29,7 +29,7 @@ public class PaymentsUtil {
 
     public static Optional<JSONObject> getPaymentDataRequest(long price) {
 
-        final String price2 ="1.00";
+        final String price2 = PaymentsUtil.centsToString(price);
 
         try {
 

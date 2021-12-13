@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class PayingActivity extends AppCompatActivity {
 
     private PaymentsClient paymentsclient;
     private ImageView button;
+    private long price;
 
     // Arbitrarily-picked constant integer you define to track a request for payment data activity.
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
@@ -41,18 +43,27 @@ public class PayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paying);
         button = findViewById(R.id.googlePayButton);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requestPayment(view);
-            }
-        });
+
 
         Wallet.WalletOptions walletOptions =
                 new Wallet.WalletOptions.Builder()
                 .setEnvironment(WalletConstants.ENVIRONMENT_TEST)
                 .build();
         paymentsclient=Wallet.getPaymentsClient(this,walletOptions);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        price= intent.getIntExtra("price",0);//-2 will mean no user(error)
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestPayment(view,price);
+            }
+        });
 
     }
 
@@ -119,12 +130,11 @@ public class PayingActivity extends AppCompatActivity {
         Log.w("loadPaymentData failed", String.format("Error code: %d", statusCode));
     }
 
-    public void requestPayment(View view) {
+    public void requestPayment(View view,long price) {
         button.setClickable(false);
 
-        String price;
         Optional paymentDataRequestJson =
-                PaymentsUtil.getPaymentDataRequest(15635);
+                PaymentsUtil.getPaymentDataRequest(price);
         PaymentDataRequest request =
                 PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString());
 
