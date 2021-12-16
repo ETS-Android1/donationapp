@@ -14,7 +14,6 @@ import java.util.List;
 
 public class CharityAddActivity extends AppCompatActivity {
     AppDatabase db;
-    Charity charity;
     EditText titleET,aboutET;
     Button insertButton;
 
@@ -45,22 +44,29 @@ public class CharityAddActivity extends AppCompatActivity {
 
         if(titleET.getText().toString()!=null && aboutET.getText().toString()!=null) {
             CharityDao charityDao = db.getCharityDao();
-            List<Charity> c = charityDao.queryTitle(titleET.getText().toString());
+            List<Charity> c = charityDao.searchTitle(titleET.getText().toString());
+            //if there are no charities with the same name
             if(c.isEmpty())
+            {
+                //we can add the charity without problem.
+                Charity charity = new Charity(titleET.getText().toString(),aboutET.getText().toString());
+                charityDao.insertAll(charity);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Successfully inserted charity ",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
+            else
             {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Charity with the same name already exists",
                         Toast.LENGTH_SHORT);
                 toast.show();
-                return;
             }
-            charity = new Charity(titleET.getText().toString(),aboutET.getText().toString());
-            charity.setTitle(titleET.getText().toString());
+
         }
-
-        CharityDao charityDao = db.getCharityDao();
-        charityDao.insertAll(charity);
-        
-
     }
+
+
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class CharityEditActivity extends AppCompatActivity {
 
@@ -50,6 +51,10 @@ public class CharityEditActivity extends AppCompatActivity {
         {
             charity.setTitle(titleET.getText().toString());
             charity.setAbout(aboutET.getText().toString());
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Successfully editted  charity ",
+                    Toast.LENGTH_SHORT);
+            toast.show();
         }
 
 

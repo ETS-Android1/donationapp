@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +57,15 @@ public class DonateActivity extends AppCompatActivity {
         dao.insertAll(d1);
 
         DonationWithUserAndCharityDao dao2 = db.getDonationWithUserAndCharityDao();
-        List<DonationWithUserAndCharity> carsList = dao2.getDonationsWithUsersAndCharities();
+        List<DonationWithUserAndCharity> donationsList = dao2.getDonationsWithUsersAndCharities();
+
+        for ( DonationWithUserAndCharity x : donationsList) {
+
+            Log.e("makenewdonation", "all donations: " + x.toString());
+            Log.e("makenewdonation", "newly inserted DONATION class obj id: " + x.donation.getDonation_id());
+
+        }
+
     }
 
 }

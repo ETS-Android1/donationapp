@@ -13,6 +13,9 @@ public interface CharityDao {
     @Query("SELECT * FROM Charity WHERE charity_id IN (:charityIds)")
     List<Charity> loadAllByIds(int[] charityIds);
 
+    @Query("SELECT * FROM Charity WHERE title = :title")
+    List<Charity> searchTitle(String title);
+
     @Query("SELECT * FROM Charity WHERE title LIKE :title")
     List<Charity> queryTitle(String title);
 

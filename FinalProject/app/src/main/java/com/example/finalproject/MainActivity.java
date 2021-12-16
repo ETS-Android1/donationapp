@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText searchText;
     TextView nameText;
     Button insertCharities,searchCharities;
+    FloatingActionButton optionsButton;
 
     FragmentManager fm;
     @Override
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, DonateActivity.class);
         intent.putExtra("charity_id",charity_id);
+        intent.putExtra("user_id",this.currentUser_id);
         startActivity(intent);
     }
     private void searchCharities()

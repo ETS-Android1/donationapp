@@ -17,4 +17,6 @@ public class DonationWithUserAndCharity {
         User user;
         @Relation(entity = Charity.class,parentColumn = "d_charity_id",entityColumn = "charity_id")
         Charity charity;
+
+
 }

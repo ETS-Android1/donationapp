@@ -78,6 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
             if(activity.currentUser_id==-1)
             {
                 editbutton.setVisibility(View.VISIBLE);
+                donateButton.setVisibility(View.INVISIBLE);
             }
 
         }
