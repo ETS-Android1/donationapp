@@ -71,7 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
                 passwordErrorEt.setVisibility(View.INVISIBLE);
                 User user = new User(usernameEt.getText().toString(),PasswordHasher.generateStrongPasswordHash(passwordEt.getText().toString()));
                 userDao.insertAll(user);
-                Toast.makeText(this, "successfully inserted: "+ user.getUsername(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "successfully registered ",Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
         else //if there is a user record stored in the database with the same username, we tell the current user and deny the profile creation.

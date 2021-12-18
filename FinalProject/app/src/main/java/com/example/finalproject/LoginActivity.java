@@ -67,8 +67,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Successfully logged in as Admin",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user_id",-1);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             this.startActivity(intent);
         }
+
         UserDao userDao = db.getUserDao();
         User user = userDao.findByUsername(uEt.getText().toString());
         if(user==null)
@@ -82,7 +84,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Successfully logged in",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user_id",user.getUser_id());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             this.startActivity(intent);
+
         }
         else
         {
