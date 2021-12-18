@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText searchText;
     TextView nameText;
     Button insertCharities,searchCharities;
-    FloatingActionButton optionsButton;
+    FloatingActionButton optionsButton,historyButton,profileButton;
 
     FragmentManager fm;
     @Override
@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         searchText = findViewById(R.id.searchText);
         nameText = findViewById(R.id.textView2);
+
+        optionsButton=findViewById(R.id.optionsFab);
+        historyButton=findViewById(R.id.historyFab);
+        profileButton=findViewById(R.id.profileFab);
 
         insertCharities=findViewById(R.id.insertCharities);
         searchCharities=findViewById(R.id.searchCharities);
@@ -50,6 +54,18 @@ public class MainActivity extends AppCompatActivity {
                 searchCharities();
             }
         });
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userOptionsVisibility();
+            }
+        });
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDonationHistoryActivity();
+            }
+        });
     }
 
     @Override
@@ -64,11 +80,8 @@ public class MainActivity extends AppCompatActivity {
             nameText.setText("admin");
             insertCharities=findViewById(R.id.insertCharities);
             insertCharities.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            UserDao userDao = db.getUserDao();
-            User user = userDao.findById(currentUser_id);
+            optionsButton.setVisibility(View.INVISIBLE);
+            //admin doesn't need a profile edit or order history page
         }
 
     }
@@ -77,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateView();
+        historyButton.setVisibility(View.INVISIBLE);
+        profileButton.setVisibility(View.INVISIBLE);
     }
 
     public void startCharityEditActivity(int charity_id)
@@ -97,16 +112,24 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("user_id",this.currentUser_id);
         startActivity(intent);
     }
+    public void startDonationHistoryActivity()
+    {
+        Intent intent = new Intent(this, DonationHistoryActivity.class);
+        intent.putExtra("user_id",this.currentUser_id);
+        startActivity(intent);
+    }
     private void searchCharities()
     {
         CharityDao charityDao = db.getCharityDao();
-        List<Charity> charities = charityDao.queryTitle(searchText.getText().toString());
+        //%are important for regex
+        List<Charity> charities = charityDao.queryTitle("%"+searchText.getText().toString()+"%");
 
         if(charities.size()==0) {
             Toast toast = Toast.makeText(getApplicationContext(),
                     "No Charity with the same name exists",
                     Toast.LENGTH_SHORT);
             toast.show();
+            return;
         }
         fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
@@ -141,6 +164,23 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.frameLayout1, new CharityFragment(charities,db), null).addToBackStack(null);
         }
         fragmentTransaction.commit();
+    }
+    public void userOptionsVisibility()
+    {
+        if(historyButton.getVisibility()==View.VISIBLE&& profileButton.getVisibility()==View.VISIBLE)
+        {
+            historyButton.setVisibility(View.INVISIBLE);
+            profileButton.setVisibility(View.INVISIBLE);
+        }
+        else if(historyButton.getVisibility()==View.INVISIBLE&& profileButton.getVisibility()==View.INVISIBLE)
+        {
+            historyButton.setVisibility(View.VISIBLE);
+            profileButton.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.e("userOptionsVisibility", "error setting visibility  ");
+        }
     }
 }
 

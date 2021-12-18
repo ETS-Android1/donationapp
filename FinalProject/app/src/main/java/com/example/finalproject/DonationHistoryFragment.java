@@ -15,10 +15,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CharityFragment#newInstance} factory method to
+ * Use the {@link DonationHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CharityFragment extends Fragment {
+public class DonationHistoryFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,17 +30,19 @@ public class CharityFragment extends Fragment {
     private String mParam2;
 
     RecyclerView recyclerView;
-    CharityRecyclerViewAdapter adapter;
-    List<Charity> p;
+    DonationHistoryRecyclerViewAdapter adapter;
+    List<DonationWithUserAndCharity> d;
     AppDatabase db;
 
-    public CharityFragment() {
+    public DonationHistoryFragment() {
     }
-    public CharityFragment(List<Charity> p,AppDatabase db) {
+
+    public DonationHistoryFragment(List<DonationWithUserAndCharity> d, AppDatabase db) {
         // Required empty public constructor
-        this.p = p;
+        this.d = d;
         MainActivity main = (MainActivity) getActivity();
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -48,11 +50,11 @@ public class CharityFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CharityFragment.
+     * @return A new instance of fragment DonationHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CharityFragment newInstance(String param1, String param2) {
-        CharityFragment fragment = new CharityFragment();
+    public static DonationHistoryFragment newInstance(String param1, String param2) {
+        DonationHistoryFragment fragment = new DonationHistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,17 +74,17 @@ public class CharityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_charity, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView1);
 
-        MainActivity main = (MainActivity) getActivity();
+        View view = inflater.inflate(R.layout.fragment_donation_history, container, false);
+        recyclerView = view.findViewById(R.id.DonationHistoryRecyclerView);
 
-        Log.e("view", "view main in fragment " + main.toString());
-        adapter = new CharityRecyclerViewAdapter(view.getContext(), p,main);
+        DonationHistoryActivity activity = (DonationHistoryActivity) getActivity();
+
+        Log.e("view", "view main in donationhistoryfragment " + activity.toString());
+
+        adapter = new DonationHistoryRecyclerViewAdapter(view.getContext(),d,activity);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         return view;
-
     }
 }

@@ -11,6 +11,10 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Donation {
@@ -23,10 +27,16 @@ public class Donation {
     private int charity_id;
     @ColumnInfo(name = "amount")
     private String amount;
+    @ColumnInfo(name="date")
+    String date;
 
     public Donation(int user_id, int charity_id, String amount) {
         this.user_id = user_id;
         this.charity_id = charity_id;
+        this.amount=amount;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        this.date=formatter.format(date);
     }
 
     @Override
@@ -69,5 +79,13 @@ public class Donation {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -36,6 +36,10 @@ public class DonateActivity extends AppCompatActivity {
                 AppDatabase.class, "AppDatabase").enableMultiInstanceInvalidation().allowMainThreadQueries().build();
 
         charity_id= intent.getIntExtra("charity_id",0);
+
+        CharityDao charityDao = db.getCharityDao();
+        Charity charity = charityDao.findById(charity_id);
+
         user_id= intent.getIntExtra("user_id",0);
         donateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +47,7 @@ public class DonateActivity extends AppCompatActivity {
 
                 if( amountET.getText().toString().length()!=0 && Integer.parseInt(amountET.getText().toString())!=0 )
                 {
-                    makeNewDonation(charity_id,user_id,amountET.getText().toString());
+                    makeNewDonation(charity_id,user_id,PaymentsUtil.centsToString(Integer.parseInt(amountET.getText().toString())));
                 }
 
             }
@@ -62,7 +66,7 @@ public class DonateActivity extends AppCompatActivity {
         for ( DonationWithUserAndCharity x : donationsList) {
 
             Log.e("makenewdonation", "all donations: " + x.toString());
-            Log.e("makenewdonation", "newly inserted DONATION class obj id: " + x.donation.getDonation_id());
+            Log.e("makenewdonation", "newly inserted DONATION class obj : " + x.donation.getDate()+" "+x.donation.getAmount());
 
         }
 

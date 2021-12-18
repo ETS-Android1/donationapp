@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
          db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "AppDatabase").enableMultiInstanceInvalidation().allowMainThreadQueries().build();
+                AppDatabase.class, "AppDatabase").enableMultiInstanceInvalidation().allowMainThreadQueries().addMigrations(AppDatabase.MIGRATION_1_2).build();
 
          uEt = findViewById(R.id.usernameText);
          pEt = findViewById(R.id.passwordText);

@@ -17,13 +17,16 @@
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_charity_add.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_charity_edit.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_donate.xml" value="0.21875" />
+        <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_donation_history.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_login.xml" value="0.21510416666666668" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_paying.xml" value="0.21510416666666668" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_register.xml" value="0.21510416666666668" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/child_view.xml" value="0.21875" />
+        <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/child_view2.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/donate_with_googlepay_button.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/fragment_charity.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/eliam/AndroidStudioProjects/FinalProject/app/src/main/res/layout/fragment_donation_history.xml" value="0.21875" />
       </map>
     </option>
   </component>
