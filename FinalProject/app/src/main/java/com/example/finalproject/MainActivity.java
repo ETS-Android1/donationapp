@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startDonationHistoryActivity();
             }
         });
+
     }
 
     @Override
@@ -83,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             optionsButton.setVisibility(View.INVISIBLE);
             //admin doesn't need a profile edit or order history page
         }
-
     }
 
     @Override

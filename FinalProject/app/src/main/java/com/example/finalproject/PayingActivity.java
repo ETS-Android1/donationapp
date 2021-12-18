@@ -57,7 +57,7 @@ public class PayingActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
-        price= intent.getIntExtra("price",0);//-2 will mean no user(error)
+        price= Integer.parseInt(intent.getStringExtra("price"));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

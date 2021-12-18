@@ -41,7 +41,7 @@ public class DonationHistoryRecyclerViewAdapter extends RecyclerView.Adapter <Do
         DonationWithUserAndCharity d = mData.get(position);
         holder.charityTitle.setText( activity.db.getCharityDao().findById(d.donation.getCharity_id()).getTitle() );
         Donation temp = activity.db.getDonationDao().findById(d.donation.getDonation_id());
-        holder.donationAmount.setText( temp.getAmount() );
+        holder.donationAmount.setText( PaymentsUtil.centsToString(Integer.parseInt(temp.getAmount())) +" $");
         holder.donationDate.setText(temp.getDate());
         holder.donateButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -47,7 +47,7 @@ public class DonateActivity extends AppCompatActivity {
 
                 if( amountET.getText().toString().length()!=0 && Integer.parseInt(amountET.getText().toString())!=0 )
                 {
-                    makeNewDonation(charity_id,user_id,PaymentsUtil.centsToString(Integer.parseInt(amountET.getText().toString())));
+                    makeNewDonation(charity_id,user_id,amountET.getText().toString());
                 }
 
             }
@@ -58,6 +58,14 @@ public class DonateActivity extends AppCompatActivity {
     {
         DonationDao dao = db.getDonationDao();
         Donation d1 = new Donation(user_id,charity_id,price);
+
+        Intent intent = new Intent(this, PayingActivity.class);
+        intent.putExtra("price",price);
+        //merge payingactivity with this
+        //dont allow to access activity if user has no card. let users add cards
+        
+
+        startActivity(intent);
         dao.insertAll(d1);
 
         DonationWithUserAndCharityDao dao2 = db.getDonationWithUserAndCharityDao();
@@ -66,7 +74,7 @@ public class DonateActivity extends AppCompatActivity {
         for ( DonationWithUserAndCharity x : donationsList) {
 
             Log.e("makenewdonation", "all donations: " + x.toString());
-            Log.e("makenewdonation", "newly inserted DONATION class obj : " + x.donation.getDate()+" "+x.donation.getAmount());
+            Log.e("makenewdonation", "newly inserted DONATION class obj : " + x.donation.getDate()+" "+PaymentsUtil.centsToString(Integer.parseInt(x.donation.getAmount())));
 
         }
 

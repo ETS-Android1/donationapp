@@ -26,7 +26,7 @@ public class Donation {
     @ColumnInfo(name = "d_charity_id")
     private int charity_id;
     @ColumnInfo(name = "amount")
-    private String amount;
+    private String amount;//stored as amount of cents
     @ColumnInfo(name="date")
     String date;
 

@@ -29,6 +29,9 @@ public interface DonationDao {
     @Delete
     void delete(Donation donation);
 
+    @Query("DELETE FROM Donation WHERE donation_id LIKE :donation_id")
+    void deleteById(int donation_id);
+
     @Update
     public void updateDonations(Donation donation);
 }
