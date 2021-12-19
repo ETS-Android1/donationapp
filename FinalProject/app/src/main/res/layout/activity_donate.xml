@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:enabled="false"
-        android:text="Amount"
+        android:text="Amount(in cents)"
         />
     <EditText
         android:id="@+id/donationAmountET"

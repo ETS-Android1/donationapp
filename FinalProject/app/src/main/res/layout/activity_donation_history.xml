@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/searchText"
+        android:id="@+id/searchText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
@@ -36,20 +36,27 @@
         android:layout_marginRight="49dp"
         android:hint="Search"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/searchCharities"
+        app:layout_constraintBottom_toTopOf="@+id/searchDonations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:focusable="false" android:focusableInTouchMode="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/searchCharities"
+        android:id="@+id/searchDonations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="search charity name"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintStart_toStartOf="@+id/frameLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/searchText" />
+        app:layout_constraintTop_toBottomOf="@+id/searchText2" />
+    <Button
+        android:id="@+id/backToMainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/searchText2" />
 
     <FrameLayout
         android:id="@+id/frameLayout2"
@@ -58,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCharities" />
+        app:layout_constraintTop_toBottomOf="@+id/searchDonations" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

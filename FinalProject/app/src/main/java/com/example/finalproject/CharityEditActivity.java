@@ -15,7 +15,7 @@ public class CharityEditActivity extends AppCompatActivity {
     AppDatabase db;
     Charity charity;
     EditText titleET,aboutET;
-    Button editButton;
+    Button editButton,deleteCharityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,13 @@ public class CharityEditActivity extends AppCompatActivity {
 
             }
         });
+        deleteCharityButton = findViewById(R.id.deleteCharityButton);
+        deleteCharityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteCharity();
+            }
+        });
     }
     @Override
     protected void onStart() {
@@ -40,9 +47,26 @@ public class CharityEditActivity extends AppCompatActivity {
                 AppDatabase.class, "AppDatabase").enableMultiInstanceInvalidation().allowMainThreadQueries().build();
         CharityDao charityDao = db.getCharityDao();
 
-        charity = charityDao.findById(intent.getIntExtra("charity_id",-2));//-2 will mean no charity(error)
+        charity = charityDao.findById(intent.getIntExtra("charity_id",-2));
         titleET.setText(charity.getTitle());
         aboutET.setText(charity.getAbout());
+
+    }
+    private void deleteCharity()
+    {
+        DonationDao dDao = db.getDonationDao();
+        dDao.deleteByCharity_id(this.charity.getCharity_id());
+
+        CharityDao charityDao = db.getCharityDao();
+        charityDao.delete(this.charity);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Successfully deleted charity ",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user_id",-1);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        this.startActivity(intent);
 
     }
 

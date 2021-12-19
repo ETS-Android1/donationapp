@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".UserEditing"
+            android:exported="true" />
+        <activity
             android:name=".DonationHistoryActivity"
             android:exported="true" />
         <activity

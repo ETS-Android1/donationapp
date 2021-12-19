@@ -55,6 +55,10 @@ public class CharityAddActivity extends AppCompatActivity {
                         "Successfully inserted charity ",
                         Toast.LENGTH_SHORT);
                 toast.show();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("user_id",-1);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                this.startActivity(intent);
 
             }
             else

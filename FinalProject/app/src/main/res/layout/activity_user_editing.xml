@@ -7,45 +7,51 @@
     android:orientation="vertical"
     tools:context=".CharityEditActivity">
 
-    <EditText
-
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:layout_margin="4dp"
         android:enabled="false"
-        android:text="Charity title: "
-        />
-    <EditText
-        android:id="@+id/charityTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:enabled="false"
-        android:text="Charity description: "
-        />
-    <EditText
-        android:id="@+id/charityAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="200dp"
-        android:background="@drawable/rectangle_drawable"
-        android:inputType="textMultiLine"
+        android:text="Editing your username"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/usernameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        />
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="password"
+        />
+    <EditText
+        android:id="@+id/errorET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:enabled="false"
+        android:text="Make sure information is correct."
+        android:textColor="@color/red"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/passwordConfirmET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="confirm password"
         />
 
     <Button
-        android:id="@+id/editButton"
+        android:id="@+id/editButton2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="edit" />
-    <Button
-        android:id="@+id/deleteCharityButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete this charity" />
 </LinearLayout>

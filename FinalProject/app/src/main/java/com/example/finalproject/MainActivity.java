@@ -66,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 startDonationHistoryActivity();
             }
         });
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startUserEditingActivity();
+            }
+        });
+
 
     }
 
@@ -76,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         currentUser_id= intent.getIntExtra("user_id",-2);//-2 will mean no user(error)
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "AppDatabase").enableMultiInstanceInvalidation().allowMainThreadQueries().build();
+
         if(currentUser_id==-1)
         {
             nameText.setText("admin");
@@ -84,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
             optionsButton.setVisibility(View.INVISIBLE);
             //admin doesn't need a profile edit or order history page
         }
+        else
+        {
+            UserDao userDao = db.getUserDao();
+            User user = userDao.findById(currentUser_id);
+            nameText.setText("Logged in as: "+user.getUsername());
+
+        }
+        searchText.setText("");
     }
 
     @Override
@@ -103,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
     public void startCharityInsertActivity()
     {
         Intent intent = new Intent(this, CharityAddActivity.class);
+        startActivity(intent);
+    }
+    public void startUserEditingActivity()
+    {
+        Intent intent = new Intent(this, UserEditing.class);
+        intent.putExtra("user_id",this.currentUser_id);
         startActivity(intent);
     }
     public void startDonateActivity(int charity_id)
